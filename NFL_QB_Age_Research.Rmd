@@ -1,0 +1,248 @@
+---
+title: "How NFL QB Age Affects Their Performance?"
+author: "Brandon Miller"
+date: '2022-05-12'
+output: html_document
+---
+
+```{r setup, include=FALSE}
+knitr::opts_chunk$set(echo = TRUE)
+```
+## R Markdown
+```{r}
+# loading in 10 years of NFL play-by-play
+library(tidyverse)
+library(nflfastR)
+pbp_2011 <- load_pbp(2011)
+pbp_2012 <- load_pbp(2012)
+pbp_2013 <- load_pbp(2013)
+pbp_2014 <- load_pbp(2014)
+pbp_2015 <- load_pbp(2015)
+pbp_2016 <- load_pbp(2016)
+pbp_2017 <- load_pbp(2017)
+pbp_2018 <- load_pbp(2018)
+pbp_2019 <- load_pbp(2019)
+pbp_2020 <- load_pbp(2020)
+```
+```{r}
+#creating 10 datasets of QB stats (min 100 attempts)
+library(tidyverse)
+library(dplyr)
+qb_2011 <- nflfastR::load_pbp(2011) %>%
+  dplyr::filter(season_type == "REG") %>%
+  nflfastR::calculate_player_stats() %>%
+  dplyr::arrange(-passing_epa) %>%
+  dplyr::select(player_name, recent_team, completions, attempts, passing_yards, passing_tds, interceptions, passing_epa) %>%
+  dplyr::filter(attempts > 100)
+qb_2012 <- nflfastR::load_pbp(2012) %>%
+  dplyr::filter(season_type == "REG") %>%
+  nflfastR::calculate_player_stats() %>%
+  dplyr::arrange(-passing_epa) %>%
+  dplyr::select(player_name, recent_team, completions, attempts, passing_yards, passing_tds, interceptions, passing_epa) %>%
+  dplyr::filter(attempts > 100)
+qb_2013 <- nflfastR::load_pbp(2013) %>%
+  dplyr::filter(season_type == "REG") %>%
+  nflfastR::calculate_player_stats() %>%
+  dplyr::arrange(-passing_epa) %>%
+  dplyr::select(player_name, recent_team, completions, attempts, passing_yards, passing_tds, interceptions, passing_epa) %>%
+  dplyr::filter(attempts > 100)
+qb_2014 <- nflfastR::load_pbp(2014) %>%
+  dplyr::filter(season_type == "REG") %>%
+  nflfastR::calculate_player_stats() %>%
+  dplyr::arrange(-passing_epa) %>%
+  dplyr::select(player_name, recent_team, completions, attempts, passing_yards, passing_tds, interceptions, passing_epa) %>%
+  dplyr::filter(attempts > 100)
+qb_2015 <- nflfastR::load_pbp(2015) %>%
+  dplyr::filter(season_type == "REG") %>%
+  nflfastR::calculate_player_stats() %>%
+  dplyr::arrange(-passing_epa) %>%
+  dplyr::select(player_name, recent_team, completions, attempts, passing_yards, passing_tds, interceptions, passing_epa) %>%
+  dplyr::filter(attempts > 100)
+qb_2016 <- nflfastR::load_pbp(2016) %>%
+  dplyr::filter(season_type == "REG") %>%
+  nflfastR::calculate_player_stats() %>%
+  dplyr::arrange(-passing_epa) %>%
+  dplyr::select(player_name, recent_team, completions, attempts, passing_yards, passing_tds, interceptions, passing_epa) %>%
+  dplyr::filter(attempts > 100)
+qb_2017 <- nflfastR::load_pbp(2017) %>%
+  dplyr::filter(season_type == "REG") %>%
+  nflfastR::calculate_player_stats() %>%
+  dplyr::arrange(-passing_epa) %>%
+  dplyr::select(player_name, recent_team, completions, attempts, passing_yards, passing_tds, interceptions, passing_epa) %>%
+  dplyr::filter(attempts > 100)
+qb_2018 <- nflfastR::load_pbp(2018) %>%
+  dplyr::filter(season_type == "REG") %>%
+  nflfastR::calculate_player_stats() %>%
+  dplyr::arrange(-passing_epa) %>%
+  dplyr::select(player_name, recent_team, completions, attempts, passing_yards, passing_tds, interceptions, passing_epa) %>%
+  dplyr::filter(attempts > 100)
+qb_2019 <- nflfastR::load_pbp(2019) %>%
+  dplyr::filter(season_type == "REG") %>%
+  nflfastR::calculate_player_stats() %>%
+  dplyr::arrange(-passing_epa) %>%
+  dplyr::select(player_name, recent_team, completions, attempts, passing_yards, passing_tds, interceptions, passing_epa) %>%
+  dplyr::filter(attempts > 100)
+qb_2020 <- nflfastR::load_pbp(2020) %>%
+  dplyr::filter(season_type == "REG") %>%
+  nflfastR::calculate_player_stats() %>%
+  dplyr::arrange(-passing_epa) %>%
+  dplyr::select(player_name, recent_team, completions, attempts, passing_yards, passing_tds, interceptions, passing_epa) %>%
+  dplyr::filter(attempts > 100)
+```
+```{r}
+# putting them into formatted tables
+library(dplyr)
+qb_2011_table <- qb_2011 %>% kableExtra::kable(caption = "Quarterback Stats Summary 2011", digits = 2) %>% kableExtra::kable_classic(full_width = F, html_font = "Cambria")
+qb_2012_table <- qb_2012 %>% kableExtra::kable(caption = "Quarterback Stats Summary 2012", digits = 2) %>% kableExtra::kable_classic(full_width = F, html_font = "Cambria")
+qb_2013_table <- qb_2013 %>% kableExtra::kable(caption = "Quarterback Stats Summary 2013", digits = 2) %>% kableExtra::kable_classic(full_width = F, html_font = "Cambria")
+qb_2014_table <- qb_2014 %>% kableExtra::kable(caption = "Quarterback Stats Summary 2014", digits = 2) %>% kableExtra::kable_classic(full_width = F, html_font = "Cambria")
+qb_2015_table <- qb_2015 %>% kableExtra::kable(caption = "Quarterback Stats Summary 2015", digits = 2) %>% kableExtra::kable_classic(full_width = F, html_font = "Cambria")
+qb_2016_table <- qb_2016 %>% kableExtra::kable(caption = "Quarterback Stats Summary 2016", digits = 2) %>% kableExtra::kable_classic(full_width = F, html_font = "Cambria")
+qb_2017_table <- qb_2017 %>% kableExtra::kable(caption = "Quarterback Stats Summary 2017", digits = 2) %>% kableExtra::kable_classic(full_width = F, html_font = "Cambria")
+qb_2018_table <- qb_2018 %>% kableExtra::kable(caption = "Quarterback Stats Summary 2018", digits = 2) %>% kableExtra::kable_classic(full_width = F, html_font = "Cambria")
+qb_2019_table <- qb_2019 %>% kableExtra::kable(caption = "Quarterback Stats Summary 2019", digits = 2) %>% kableExtra::kable_classic(full_width = F, html_font = "Cambria")
+qb_2020_table <- qb_2020 %>% kableExtra::kable(caption = "Quarterback Stats Summary 2020", digits = 2) %>% kableExtra::kable_classic(full_width = F, html_font = "Cambria")
+#filtering only QBs that played for at least 3 years
+qb_seasons_played <- table(c(unique(qb_2011$player_name), unique(qb_2012$player_name), unique(qb_2013$player_name), unique(qb_2014$player_name), unique(qb_2015$player_name), unique(qb_2016$player_name), unique(qb_2017$player_name), unique(qb_2018$player_name), unique(qb_2019$player_name), unique(qb_2020$player_name)))
+qb_seasons_played.df <- data.frame(qb_seasons_played)
+qb_seasons_played.df
+qb_seasons_played.filter <- qb_seasons_played.df %>% filter(Freq > 2)
+qb_seasons_played_table <- qb_seasons_played.filter %>% kableExtra::kable(caption = "Number of Seasons played from QBs", col.names = c("Name", "# of Years"), digits = 2) %>% kableExtra::kable_classic(full_width = F, html_font = "Cambria")
+dim(qb_seasons_played.filter)
+```
+```{r}
+#displaying current progress
+qb_seasons_played_table
+head(qb_2011)
+```
+```{r}
+# adding a year column to each dataset
+qb_2011 <- qb_2011 %>% mutate(year=2011)
+qb_2012 <- qb_2012 %>% mutate(year=2012)
+qb_2013 <- qb_2013 %>% mutate(year=2013)
+qb_2014 <- qb_2014 %>% mutate(year=2014)
+qb_2015 <- qb_2015 %>% mutate(year=2015)
+qb_2016 <- qb_2016 %>% mutate(year=2016)
+qb_2017 <- qb_2017 %>% mutate(year=2017)
+qb_2018 <- qb_2018 %>% mutate(year=2018)
+qb_2019 <- qb_2019 %>% mutate(year=2019)
+qb_2020 <- qb_2020 %>% mutate(year=2020)
+```
+```{r}
+#combining datasets by rows
+qb_stats <- bind_rows(qb_2011, qb_2012, qb_2013, qb_2014, qb_2015, qb_2016, qb_2017, qb_2018, qb_2019, qb_2020)
+#creating a dataset of QBs birthdays
+player_name <- qb_seasons_played.filter$Var1
+qb_yob <- c(1987, 1989, 1983, 1984, 1992, 1989, 1985, 1995, 1990, 1982, 1983, 1993, 1985, 1987, 1988, 1989, 1979, 1988, 1992, 1979, 1991, 1993, 1995, 1981, 1996, 1983, 1985, 1988, 1991, 1994, 1988, 1979, 1994, 1988, 1997, 1982, 1989, 1975, 1993, 1985, 1986, 1981, 1988, 1994, 1980, 1989, 1995, 1976, 1981, 1982, 1990, 1988, 1988, 1987, 1997, 1977, 1992, 1980, 1989)
+qb_birthyear <- data.frame(player_name, qb_yob)
+#fixing a flaw in the data
+qb_stats[15,1] = "A.Smith"
+#joining datasets together
+qb_final <- left_join(qb_stats, qb_birthyear, by="player_name")
+#adding QB age to dataset
+qb_final <- qb_final %>% mutate(qb_age=year-qb_yob)
+#filtering out players who did not play at least 3 years
+qb_final <- na.omit(qb_final)
+#creating QB Rating
+a <- ((qb_final$completions/qb_final$attempts)-0.3)*5
+b <- ((qb_final$passing_yards/qb_final$attempts)-3)*0.25
+c <- ((qb_final$passing_tds/qb_final$attempts)*20)
+d <- 2.375-((qb_final$interceptions/qb_final$attempts)*25)
+qb_final <- qb_final %>% mutate(qbr=((a+b+c+d)/6)*100)
+avg_qbrating <- qb_final %>% group_by(qb_age) %>% summarize(avg_qbr=mean(qbr))
+#creating completion percentage
+comp_per <- (qb_final$completions/qb_final$attempts)*100
+qb_final <- qb_final %>% mutate(comp_perc=comp_per)
+#creating sub-dataset
+qb_grouped <- qb_final %>% group_by(qb_age) %>% summarise(avg_epa=mean(passing_epa), td_int_r=mean(passing_tds/interceptions), avg_qbr=mean(qbr), comp_per=mean(comp_perc), n=n())
+#filtering out the outliers that don't represent age group
+qb_grouped <- qb_grouped %>% filter(n>=4)
+```
+```{r}
+#grouping into conference
+qb_final <- qb_final %>% mutate(conf=case_when(recent_team=="ARI"|recent_team=="ATL"|recent_team=="CAR"|recent_team=="CHI"|recent_team=="DAL"|recent_team=="DET"|recent_team=="GB"|recent_team=="LA"|recent_team=="MIN"|recent_team=="NO"|recent_team=="NYG"|recent_team=="PHI"|recent_team=="SEA"|recent_team=="SF"|recent_team=="TB"|recent_team=="WAS" ~ "NFC", recent_team=="BAL"|recent_team=="BUF"|recent_team=="CIN"|recent_team=="CLE"|recent_team=="DEN"|recent_team=="HOU"|recent_team=="IND"|recent_team=="JAX"|recent_team=="KC"|recent_team=="LAC"|recent_team=="LV"|recent_team=="MIA"|recent_team=="NE"|recent_team=="NYJ"|recent_team=="PIT"|recent_team=="TEN" ~ "AFC"))
+qb_nfc <- qb_final %>% filter(conf=="NFC")
+qb_afc <- qb_final %>% filter(conf=="AFC")
+
+##looking to see if there is a difference between conference
+ggplot(qb_nfc, aes(x=qb_age, y=passing_epa, group=player_name, color=player_name)) + geom_point() + geom_line()
+ggplot(qb_afc, aes(x=qb_age, y=passing_epa, group=player_name, color=player_name)) + geom_point() + geom_line()
+ggplot(qb_nfc, aes(x=qb_age, y=qbr, group=player_name, color=player_name)) + geom_point() + geom_line()
+ggplot(qb_afc, aes(x=qb_age, y=qbr, group=player_name, color=player_name)) + geom_point() + geom_line()
+ggplot(qb_nfc, aes(x=qb_age, y=comp_perc, group=player_name, color=player_name)) + geom_point() + geom_line()
+ggplot(qb_afc, aes(x=qb_age, y=comp_perc, group=player_name, color=player_name)) + geom_point() + geom_line()
+```
+```{r}
+#filtering out the outliers that don't represent age group
+qb_conf <- qb_final %>% group_by(qb_age, conf) %>% summarise(avg_epa=mean(passing_epa), avg_qbr=mean(qbr), comp_per=mean(comp_perc), n=n())
+qb_conf <- qb_conf %>% filter(n>=4)
+library(ggplot2)
+ggplot(qb_conf, aes(x=qb_age, y=avg_epa, color=conf)) + geom_point() + geom_line()
+ggplot(qb_conf, aes(x=qb_age, y=avg_qbr, color=conf)) + geom_point() + geom_line()
+ggplot(qb_conf, aes(x=qb_age, y=comp_per, color=conf)) + geom_point() + geom_line()
+```
+
+```{r}
+#linear mixed effects models
+library(lme4)
+library(lmerTest)
+mod2=lmer(data=qb_final, passing_epa ~ qb_age + (1|player_name))
+summary(mod2)
+mod3=lmer(data=qb_final, qbr ~ qb_age + (1|player_name))
+summary(mod3)
+mod4=lmer(data=qb_final, comp_perc ~ qb_age + (1|player_name))
+summary(mod4)
+
+#checking for outliers in data
+set.seed(1)
+confint(mod2)
+ranef(mod2)$player_name %>% head(5)
+coef(mod2)$player_name %>% head(5)
+library(merTools)
+predictInterval(mod2)
+REsim(mod2)
+plotREsim(REsim(mod2))
+
+set.seed(1)
+confint(mod3)
+ranef(mod3)$player_name %>% head(5)
+coef(mod3)$player_name %>% head(5)
+library(merTools)
+predictInterval(mod3)
+REsim(mod3)
+plotREsim(REsim(mod3))
+
+set.seed(1)
+confint(mod4)
+ranef(mod4)$player_name %>% head(5)
+coef(mod4)$player_name %>% head(5)
+library(merTools)
+predictInterval(mod4)
+REsim(mod4)
+plotREsim(REsim(mod4))
+```
+
+```{r}
+#looked for quadratic relationship
+mod=lm(data=qb_final, passing_epa ~ poly(qb_age))
+summary(mod)
+mod7=lm(data=qb_final, qbr ~ poly(qb_age))
+summary(mod7)
+
+```
+```{r}
+#Poster data visualizations
+#graphical exploration
+library(ggplot2)
+library(gridExtra)
+avg1 <- ggplot(qb_grouped, aes(x=qb_age, y=avg_epa)) + geom_point() + geom_line()+labs(x="", y="Average EPA")+theme_classic()
+avg2 <- ggplot(qb_grouped, aes(x=qb_age, y=avg_qbr)) + geom_point() + geom_line()+labs(x="", y="Average QBR")+theme_classic()
+avg3 <- ggplot(qb_grouped, aes(x=qb_age, y=comp_per)) + geom_point() + geom_line() + geom_text(aes(label=n, vjust = -0.5, nudge_y = 0.5))+ylim(c(60,67))+labs(x="Quarterback Age (years)", y="Average Comp Perc")+theme_classic()
+grid.arrange(avg1, avg2, avg3)
+```
+```{r}
+#more graphical exploration
+qb_nfc_top5 <- qb_nfc %>% arrange(player_name)
+qb_nfc_top5 <- qb_nfc_top5[1:60,]
+ggplot(qb_nfc_top5, aes(x=qb_age, y=passing_epa, group=player_name, color=player_name)) + geom_point() + geom_line() + labs(y="Quarterback EPA", x="Quarterback Age (years)", color="Player Name")+theme_bw()
+```
